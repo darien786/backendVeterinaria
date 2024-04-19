@@ -12,7 +12,7 @@ using backendVeterinaria.Data;
 namespace backendVeterinaria.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240419232652_CreacionInicial")]
+    [Migration("20240419235524_CreacionInicial")]
     partial class CreacionInicial
     {
         /// <inheritdoc />
