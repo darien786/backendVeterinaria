@@ -9,8 +9,8 @@ public class SeedEstatus : IEntityTypeConfiguration<Estatus>
     public void Configure(EntityTypeBuilder<Estatus> builder)
     {
         builder.HasData(
-            new Estatus{ estatusId = 1, nombreEstatus = "Activo" },
-            new Estatus{ estatusId = 2, nombreEstatus = "Inactivo" }
+            new Estatus{ estatusId = 1, nombre_estatus = "Activo" },
+            new Estatus{ estatusId = 2, nombre_estatus = "Inactivo" }
         );
     }
 }

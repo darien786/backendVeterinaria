@@ -10,13 +10,13 @@ public class DataContext : DbContext{
     }
 
     public DbSet<Estatus> Estatus { get; set; }
-    public DbSet<Rol> Rol { get; set; }
-    public DbSet<Persona> Persona { get; set; }
-    public DbSet<Empleado> Empleado { get; set; }
+    public DbSet<Roles> Roles { get; set; }
+    public DbSet<Personas> Personas { get; set; }
+    public DbSet<Empleados> Empleados { get; set; }
 
     protected override void  OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new SeedEstatus());
-        modelBuilder.ApplyConfiguration(new SeedRol());
+        modelBuilder.ApplyConfiguration(new SeedRoles());
     }
 }

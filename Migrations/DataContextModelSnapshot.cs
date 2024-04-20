@@ -22,13 +22,13 @@ namespace backendVeterinaria.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("backendVeterinaria.Models.Empleado", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Empleados", b =>
                 {
-                    b.Property<int>("empleadoId")
+                    b.Property<int>("empleadosId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("empleadoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("empleadosId"));
 
                     b.Property<string>("correo")
                         .IsRequired()
@@ -41,33 +41,41 @@ namespace backendVeterinaria.Migrations
                     b.Property<int?>("estatusId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("fechaBaja")
+                    b.Property<string>("fecha_baja")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("fechaIngreso")
+                    b.Property<string>("fecha_ingreso")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("personaId")
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("personasId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("rolId")
+                    b.Property<int?>("rolesId")
                         .HasColumnType("integer");
 
                     b.Property<string>("sexo")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("empleadoId");
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("empleadosId");
 
                     b.HasIndex("estatusId");
 
-                    b.HasIndex("personaId");
+                    b.HasIndex("personasId");
 
-                    b.HasIndex("rolId");
+                    b.HasIndex("rolesId");
 
-                    b.ToTable("Empleado");
+                    b.ToTable("Empleados");
                 });
 
             modelBuilder.Entity("backendVeterinaria.Models.Estatus", b =>
@@ -78,7 +86,7 @@ namespace backendVeterinaria.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("estatusId"));
 
-                    b.Property<string>("nombreEstatus")
+                    b.Property<string>("nombre_estatus")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -90,28 +98,28 @@ namespace backendVeterinaria.Migrations
                         new
                         {
                             estatusId = 1,
-                            nombreEstatus = "Activo"
+                            nombre_estatus = "Activo"
                         },
                         new
                         {
                             estatusId = 2,
-                            nombreEstatus = "Inactivo"
+                            nombre_estatus = "Inactivo"
                         });
                 });
 
-            modelBuilder.Entity("backendVeterinaria.Models.Persona", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Personas", b =>
                 {
-                    b.Property<int>("personaId")
+                    b.Property<int>("personasId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("personaId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("personasId"));
 
-                    b.Property<string>("apellidoMaterno")
+                    b.Property<string>("apellido_materno")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("apellidoPaterno")
+                    b.Property<string>("apellido_paterno")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -123,56 +131,56 @@ namespace backendVeterinaria.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("tipoPersona")
+                    b.Property<string>("tipo_persona")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("personaId");
+                    b.HasKey("personasId");
 
-                    b.ToTable("Persona");
+                    b.ToTable("Personas");
                 });
 
-            modelBuilder.Entity("backendVeterinaria.Models.Rol", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Roles", b =>
                 {
-                    b.Property<int?>("rolId")
+                    b.Property<int?>("rolesId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("rolId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("rolesId"));
 
-                    b.Property<string>("nombreRol")
+                    b.Property<string>("nombre_rol")
                         .HasColumnType("text");
 
-                    b.HasKey("rolId");
+                    b.HasKey("rolesId");
 
-                    b.ToTable("Rol");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
-                            rolId = 1,
-                            nombreRol = "Comercial"
+                            rolesId = 1,
+                            nombre_rol = "Comercial"
                         },
                         new
                         {
-                            rolId = 2,
-                            nombreRol = "General"
+                            rolesId = 2,
+                            nombre_rol = "General"
                         });
                 });
 
-            modelBuilder.Entity("backendVeterinaria.Models.Empleado", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Empleados", b =>
                 {
                     b.HasOne("backendVeterinaria.Models.Estatus", null)
                         .WithMany("empleados")
                         .HasForeignKey("estatusId");
 
-                    b.HasOne("backendVeterinaria.Models.Persona", null)
+                    b.HasOne("backendVeterinaria.Models.Personas", null)
                         .WithMany("empleados")
-                        .HasForeignKey("personaId");
+                        .HasForeignKey("personasId");
 
-                    b.HasOne("backendVeterinaria.Models.Rol", null)
+                    b.HasOne("backendVeterinaria.Models.Roles", null)
                         .WithMany("empleados")
-                        .HasForeignKey("rolId");
+                        .HasForeignKey("rolesId");
                 });
 
             modelBuilder.Entity("backendVeterinaria.Models.Estatus", b =>
@@ -180,12 +188,12 @@ namespace backendVeterinaria.Migrations
                     b.Navigation("empleados");
                 });
 
-            modelBuilder.Entity("backendVeterinaria.Models.Persona", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Personas", b =>
                 {
                     b.Navigation("empleados");
                 });
 
-            modelBuilder.Entity("backendVeterinaria.Models.Rol", b =>
+            modelBuilder.Entity("backendVeterinaria.Models.Roles", b =>
                 {
                     b.Navigation("empleados");
                 });

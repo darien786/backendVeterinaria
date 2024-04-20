@@ -19,7 +19,7 @@ namespace backendVeterinaria.Migrations
                 {
                     estatusId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombreEstatus = table.Column<string>(type: "text", nullable: false)
+                    nombre_estatus = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,73 +27,75 @@ namespace backendVeterinaria.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persona",
+                name: "Personas",
                 columns: table => new
                 {
-                    personaId = table.Column<int>(type: "integer", nullable: false)
+                    personasId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nombre = table.Column<string>(type: "text", nullable: false),
-                    apellidoPaterno = table.Column<string>(type: "text", nullable: false),
-                    apellidoMaterno = table.Column<string>(type: "text", nullable: false),
+                    apellido_paterno = table.Column<string>(type: "text", nullable: false),
+                    apellido_materno = table.Column<string>(type: "text", nullable: false),
                     telefono = table.Column<string>(type: "text", nullable: false),
-                    tipoPersona = table.Column<string>(type: "text", nullable: false)
+                    tipo_persona = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persona", x => x.personaId);
+                    table.PrimaryKey("PK_Personas", x => x.personasId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rol",
+                name: "Roles",
                 columns: table => new
                 {
-                    rolId = table.Column<int>(type: "integer", nullable: false)
+                    rolesId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nombreRol = table.Column<string>(type: "text", nullable: true)
+                    nombre_rol = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rol", x => x.rolId);
+                    table.PrimaryKey("PK_Roles", x => x.rolesId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empleado",
+                name: "Empleados",
                 columns: table => new
                 {
-                    empleadoId = table.Column<int>(type: "integer", nullable: false)
+                    empleadosId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     curp = table.Column<string>(type: "text", nullable: false),
                     sexo = table.Column<string>(type: "text", nullable: false),
                     correo = table.Column<string>(type: "text", nullable: false),
-                    fechaIngreso = table.Column<string>(type: "text", nullable: false),
-                    fechaBaja = table.Column<string>(type: "text", nullable: false),
+                    username = table.Column<string>(type: "text", nullable: false),
+                    password = table.Column<string>(type: "text", nullable: false),
+                    fecha_ingreso = table.Column<string>(type: "text", nullable: false),
+                    fecha_baja = table.Column<string>(type: "text", nullable: false),
                     estatusId = table.Column<int>(type: "integer", nullable: true),
-                    personaId = table.Column<int>(type: "integer", nullable: true),
-                    rolId = table.Column<int>(type: "integer", nullable: true)
+                    personasId = table.Column<int>(type: "integer", nullable: true),
+                    rolesId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Empleado", x => x.empleadoId);
+                    table.PrimaryKey("PK_Empleados", x => x.empleadosId);
                     table.ForeignKey(
-                        name: "FK_Empleado_Estatus_estatusId",
+                        name: "FK_Empleados_Estatus_estatusId",
                         column: x => x.estatusId,
                         principalTable: "Estatus",
                         principalColumn: "estatusId");
                     table.ForeignKey(
-                        name: "FK_Empleado_Persona_personaId",
-                        column: x => x.personaId,
-                        principalTable: "Persona",
-                        principalColumn: "personaId");
+                        name: "FK_Empleados_Personas_personasId",
+                        column: x => x.personasId,
+                        principalTable: "Personas",
+                        principalColumn: "personasId");
                     table.ForeignKey(
-                        name: "FK_Empleado_Rol_rolId",
-                        column: x => x.rolId,
-                        principalTable: "Rol",
-                        principalColumn: "rolId");
+                        name: "FK_Empleados_Roles_rolesId",
+                        column: x => x.rolesId,
+                        principalTable: "Roles",
+                        principalColumn: "rolesId");
                 });
 
             migrationBuilder.InsertData(
                 table: "Estatus",
-                columns: new[] { "estatusId", "nombreEstatus" },
+                columns: new[] { "estatusId", "nombre_estatus" },
                 values: new object[,]
                 {
                     { 1, "Activo" },
@@ -101,8 +103,8 @@ namespace backendVeterinaria.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Rol",
-                columns: new[] { "rolId", "nombreRol" },
+                table: "Roles",
+                columns: new[] { "rolesId", "nombre_rol" },
                 values: new object[,]
                 {
                     { 1, "Comercial" },
@@ -110,35 +112,35 @@ namespace backendVeterinaria.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleado_estatusId",
-                table: "Empleado",
+                name: "IX_Empleados_estatusId",
+                table: "Empleados",
                 column: "estatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleado_personaId",
-                table: "Empleado",
-                column: "personaId");
+                name: "IX_Empleados_personasId",
+                table: "Empleados",
+                column: "personasId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleado_rolId",
-                table: "Empleado",
-                column: "rolId");
+                name: "IX_Empleados_rolesId",
+                table: "Empleados",
+                column: "rolesId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Empleado");
+                name: "Empleados");
 
             migrationBuilder.DropTable(
                 name: "Estatus");
 
             migrationBuilder.DropTable(
-                name: "Persona");
+                name: "Personas");
 
             migrationBuilder.DropTable(
-                name: "Rol");
+                name: "Roles");
         }
     }
 }

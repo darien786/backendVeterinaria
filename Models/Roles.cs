@@ -2,11 +2,10 @@ using System.Text.Json.Serialization;
 
 namespace backendVeterinaria.Models;
 
-public class Estatus
+public class Roles
 {
-    // 
-    public int estatusId { get; set; }
-    public required string nombre_estatus { get; set; }
+    public int? rolesId { get; set; }
+    public required string? nombre_rol { get; set; }
 
     [JsonIgnore]
     public ICollection<Empleados>? empleados { get; set; } 
