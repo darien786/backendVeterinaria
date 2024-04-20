@@ -17,16 +17,12 @@ public class EmpleadosController : ControllerBase
         _context = context;
     }
 
+    //GET: api/empleados
     [HttpGet]
     public async Task<ActionResult<List<Empleados>>> Get()
     {
-        return await _context.Empleados.ToListAsync();
+        return await _context.Empleados.AsNoTracking().ToListAsync();
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Empleados>> Get(int id)
-    {
-        return await _context.Empleados.FirstOrDefaultAsync(x => x.empleadosId == id);
-    }
 
 }
