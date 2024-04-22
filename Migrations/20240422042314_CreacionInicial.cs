@@ -69,9 +69,9 @@ namespace backendVeterinaria.Migrations
                     password = table.Column<string>(type: "text", nullable: false),
                     fecha_ingreso = table.Column<string>(type: "text", nullable: false),
                     fecha_baja = table.Column<string>(type: "text", nullable: false),
-                    estatusId = table.Column<int>(type: "integer", nullable: true),
-                    personasId = table.Column<int>(type: "integer", nullable: true),
-                    rolesId = table.Column<int>(type: "integer", nullable: true)
+                    estatusId = table.Column<int>(type: "integer", nullable: false),
+                    personasId = table.Column<int>(type: "integer", nullable: false),
+                    rolesId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,17 +80,20 @@ namespace backendVeterinaria.Migrations
                         name: "FK_Empleados_Estatus_estatusId",
                         column: x => x.estatusId,
                         principalTable: "Estatus",
-                        principalColumn: "estatusId");
+                        principalColumn: "estatusId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Empleados_Personas_personasId",
                         column: x => x.personasId,
                         principalTable: "Personas",
-                        principalColumn: "personasId");
+                        principalColumn: "personasId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Empleados_Roles_rolesId",
                         column: x => x.rolesId,
                         principalTable: "Roles",
-                        principalColumn: "rolesId");
+                        principalColumn: "rolesId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

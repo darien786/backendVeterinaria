@@ -8,6 +8,5 @@ public class PersonasDTO
     public required string? apellido_materno { get; set;}
     public required string? telefono { get; set;}
     public required string? tipo_persona { get; set; }
-    public int[]? empleados { get; set; }
 
 }

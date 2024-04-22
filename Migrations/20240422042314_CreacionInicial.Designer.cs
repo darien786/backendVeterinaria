@@ -12,7 +12,7 @@ using backendVeterinaria.Data;
 namespace backendVeterinaria.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240420032514_CreacionInicial")]
+    [Migration("20240422042314_CreacionInicial")]
     partial class CreacionInicial
     {
         /// <inheritdoc />
@@ -41,7 +41,7 @@ namespace backendVeterinaria.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("estatusId")
+                    b.Property<int>("estatusId")
                         .HasColumnType("integer");
 
                     b.Property<string>("fecha_baja")
@@ -56,10 +56,10 @@ namespace backendVeterinaria.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("personasId")
+                    b.Property<int>("personasId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("rolesId")
+                    b.Property<int>("rolesId")
                         .HasColumnType("integer");
 
                     b.Property<string>("sexo")
@@ -173,17 +173,29 @@ namespace backendVeterinaria.Migrations
 
             modelBuilder.Entity("backendVeterinaria.Models.Empleados", b =>
                 {
-                    b.HasOne("backendVeterinaria.Models.Estatus", null)
+                    b.HasOne("backendVeterinaria.Models.Estatus", "estatus")
                         .WithMany("empleados")
-                        .HasForeignKey("estatusId");
+                        .HasForeignKey("estatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("backendVeterinaria.Models.Personas", null)
+                    b.HasOne("backendVeterinaria.Models.Personas", "personas")
                         .WithMany("empleados")
-                        .HasForeignKey("personasId");
+                        .HasForeignKey("personasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("backendVeterinaria.Models.Roles", null)
+                    b.HasOne("backendVeterinaria.Models.Roles", "roles")
                         .WithMany("empleados")
-                        .HasForeignKey("rolesId");
+                        .HasForeignKey("rolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("estatus");
+
+                    b.Navigation("personas");
+
+                    b.Navigation("roles");
                 });
 
             modelBuilder.Entity("backendVeterinaria.Models.Estatus", b =>

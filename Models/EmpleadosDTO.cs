@@ -10,5 +10,8 @@ public class EmpleadosDTO
     public required string password { get; set; }
     public required string fecha_ingreso { get; set; }
     public string fecha_baja { get; set; }
+    public int estatusId { get; set; }
+    public int personasId { get; set; }
+    public int rolesId { get; set; }
 
 }

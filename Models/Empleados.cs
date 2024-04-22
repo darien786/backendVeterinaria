@@ -11,5 +11,11 @@ public class Empleados{
     public required string password { get; set; }
     public required string fecha_ingreso { get; set; }
     public string fecha_baja { get; set; } 
+    public int estatusId { get; set; }
+    public Estatus estatus { get; set; }
+    public int personasId { get; set; }
+    public Personas personas { get; set; }
+    public int rolesId { get; set; }
+    public Roles roles { get; set; }
     
 }

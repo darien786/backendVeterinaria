@@ -13,6 +13,7 @@ public class DataContext : DbContext{
     public DbSet<Roles> Roles { get; set; }
     public DbSet<Personas> Personas { get; set; }
     public DbSet<Empleados> Empleados { get; set; }
+    public object EmpleadosDTO { get; internal set; }
 
     protected override void  OnModelCreating(ModelBuilder modelBuilder)
     {
